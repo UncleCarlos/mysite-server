@@ -1,9 +1,13 @@
 import { Module } from '@nestjs/common'
-import { AppController } from './app.controller'
-import { AppService } from './app.service'
 import { ConfigModule, ConfigService } from '@nestjs/config'
-import configuration from './config/env.dev'
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm'
+
+import configuration from '@/config/env.dev'
+import { AppController } from '@/app.controller'
+import { AppService } from '@/app.service'
+
+import { BackendModule } from '@/backend/backend.module'
+import { ClientModule } from '@/client/client.module'
 
 @Module({
   imports: [
@@ -16,6 +20,8 @@ import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm'
         ...configService.get('postgres'),
       }),
     }),
+    BackendModule,
+    ClientModule,
   ],
   controllers: [AppController],
   providers: [AppService],

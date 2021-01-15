@@ -1,0 +1,55 @@
+
+@baseUrl = http://127.0.0.1:3005
+
+### 获取用户
+GET {{baseUrl}}/backend/user?abc=5&bcd=true
+
+
+### 新建用户
+POST {{baseUrl}}/backend/user
+content-type: application/json
+
+{
+    "username": "{{$randomInt 0 50000}}",
+    "password": "abc"
+}
+
+
+### 获取所有区域
+GET {{baseUrl}}/gp/zone
+
+### 获取未设置分数物品
+GET {{baseUrl}}/gp/zone/2717
+
+### 获取全部分类
+GET {{baseUrl}}/item/class HTTP/1.1
+
+
+### 获取一个物品数据
+GET {{baseUrl}}/item/16920 HTTP/1.1
+
+### 修改物品数据
+PUT {{baseUrl}}/item/16918 HTTP/1.1
+content-type: application/json
+
+{
+    "class": 1,
+    "name": "嘿嘿嘿"
+}
+
+### ! 物品分页
+GET {{baseUrl}}/item?page=2&perpage=2 HTTP/1.1
+# content-type: application/json
+
+### 获取采集任务状态
+GET {{baseUrl}}/item/collector HTTP/1.1
+
+### 修改采集任务状态
+POST {{baseUrl}}/item/collector HTTP/1.1
+content-type: application/json
+
+{
+    "action": "running",
+    "running": false
+}
+
