@@ -1,0 +1,24 @@
+{
+  "APP_SETTINGS": {
+    "port": 3005
+  },
+  "DB_SETTINGS": {
+    "host": "",
+    "port": 5432,
+    "username": "",
+    "password": "",
+    "database": ""
+  },
+  "CORS_SETTINGS": {
+    "allowedOrigins": [],
+    "allowedPaths": [],
+    "allowedMethods": [],
+    "allowedCredentials": true
+  },
+  "REDIS_SETTINGS": {
+    "use": true,
+    "host": "localhost",
+    "port": 6379,
+    "password": ""
+  }
+}

@@ -1,29 +1,20 @@
+import { APP_FILTER } from '@nestjs/core'
 import { Module } from '@nestjs/common'
-import { ConfigModule, ConfigService } from '@nestjs/config'
-import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm'
 
-import configuration from '@/config/env.dev'
-import { AppController } from '@/app.controller'
-import { AppService } from '@/app.service'
+import { HealthCheckController } from '@/core/healthcheck.controller'
 
-import { BackendModule } from '@/backend/backend.module'
-import { ClientModule } from '@/client/client.module'
+import { HttpExceptionFilter } from '@/core/filters/http-exception.filter'
+import { AllExceptionsFilter } from '@/core/filters/all-exceptions.filter'
+
+import { DatabaseModule } from './common/database/database.module'
+import { AccountsModule } from './modules/accounts/accounts.module'
 
 @Module({
-  imports: [
-    ConfigModule.forRoot({ load: [configuration], isGlobal: true }),
-    TypeOrmModule.forRootAsync({
-      inject: [ConfigService],
-      useFactory: async (configService: ConfigService): Promise<TypeOrmModuleOptions> => ({
-        type: 'postgres',
-        autoLoadEntities: true,
-        ...configService.get('postgres'),
-      }),
-    }),
-    BackendModule,
-    ClientModule,
+  imports: [DatabaseModule, AccountsModule],
+  controllers: [HealthCheckController],
+  providers: [
+    { provide: APP_FILTER, useClass: HttpExceptionFilter },
+    { provide: APP_FILTER, useClass: AllExceptionsFilter },
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}

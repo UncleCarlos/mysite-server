@@ -1,7 +1,8 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
+import { EntityHelper } from '@/common/helpers/entity.helper'
 
 @Entity()
-export class User {
+export class Account extends EntityHelper {
   @PrimaryGeneratedColumn('uuid')
   id: string
 
