@@ -12,7 +12,7 @@ import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity
 
 type id = number | string
 
-export class ServiceHelper<T> {
+export abstract class ServiceHelper<T> {
   constructor(private readonly repository: Repository<T>) {}
 
   public async findAll(options: FindManyOptions<T> = {}) {

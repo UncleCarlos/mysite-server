@@ -11,7 +11,7 @@ const ormConfig: TypeOrmModuleOptions = {
   ...settings,
   database: `${settings.database}_${process.env.NODE_ENV}`,
   entities: ['dist/**/*.entity{.ts,.js}'],
-  maxQueryExecutionTime: 0.1,
+  maxQueryExecutionTime: 1000,
   synchronize: true,
   keepConnectionAlive: false,
   cli: {

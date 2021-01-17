@@ -17,8 +17,12 @@
   },
   "REDIS_SETTINGS": {
     "use": true,
-    "host": "localhost",
+    "host": "",
     "port": 6379,
     "password": ""
+  },
+  "LOGGER_SETTINGS": {
+    "level": "info",
+    "silence": []
   }
 }
