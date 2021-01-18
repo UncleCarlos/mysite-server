@@ -14,11 +14,11 @@ const ormConfig: TypeOrmModuleOptions = {
   maxQueryExecutionTime: 1000,
   synchronize: true,
   keepConnectionAlive: false,
+  autoLoadEntities: true,
   cli: {
     migrationsDir: __dirname + '/migrations/**/*{.ts,.js}',
   },
 }
-
 @Module({
   imports: [TypeOrmModule.forRoot(ormConfig)],
   providers: [DatabaseService],

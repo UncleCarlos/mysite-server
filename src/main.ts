@@ -30,9 +30,13 @@ async function bootstrap() {
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true,
+      // whitelist: true,
+      validationError: {
+        target: true,
+        value: true,
+      },
     })
   )
-
   if (redisSettings.use) {
     const pubClient: Redis = app.get(REDIS_PUBLISHER_CLIENT)
     const subClient: Redis = app.get(REDIS_SUBSCRIBER_CLIENT)
@@ -41,7 +45,6 @@ async function bootstrap() {
   } else {
     app.useWebSocketAdapter(new IoAdapter(app))
   }
-
   await app.listen(appSettings.port)
 }
 bootstrap()

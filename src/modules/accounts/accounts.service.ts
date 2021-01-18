@@ -21,15 +21,15 @@ export class AccountsService extends ServiceHelper<Account> {
     return super.findAll(options)
   }
 
-  findOne(id: number, options?: FindOneOptions<Account>) {
+  findOne(id: string, options?: FindOneOptions<Account>) {
     return super.findOne(id, options)
   }
 
-  update(id: number, updateAccountDto: UpdateAccountDto) {
+  update(id: string, updateAccountDto: UpdateAccountDto) {
     return super.update(id, updateAccountDto)
   }
 
-  delete(id: number) {
+  delete(id: string) {
     return super.delete(id)
   }
 }

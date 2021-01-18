@@ -10,8 +10,10 @@ export class AccountsController {
   constructor(private readonly accountsService: AccountsService) {}
 
   @Post()
-  create(@Body(new ValidationPipe()) createAccountDto: CreateAccountDto) {
-    return this.accountsService.create(createAccountDto)
+  async create(@Body(new ValidationPipe()) createAccountDto: CreateAccountDto) {
+    const result = await this.accountsService.create(createAccountDto)
+    delete result.password
+    return result
   }
 
   @Get()
@@ -21,16 +23,16 @@ export class AccountsController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.accountsService.findOne(+id)
+    return this.accountsService.findOne(id)
   }
 
   @Put(':id')
   update(@Param('id') id: string, @Body(new ValidationPipe()) updateAccountDto: UpdateAccountDto) {
-    return this.accountsService.update(+id, updateAccountDto)
+    return this.accountsService.update(id, updateAccountDto)
   }
 
   @Delete(':id')
   delete(@Param('id') id: string) {
-    return this.accountsService.delete(+id)
+    return this.accountsService.delete(id)
   }
 }

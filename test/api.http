@@ -1,17 +1,37 @@
 
 @baseUrl = http://127.0.0.1:3005
 
-### 获取用户
-GET {{baseUrl}}/backend/user?abc=5&bcd=true
+### 
+GET {{baseUrl}}/sources
 
+###
+GET {{baseUrl}}/sources/
+
+###
+POST {{baseUrl}}/sources
+content-type: application/json
+
+{
+    "name": "超能网",
+    "url": "https://www.expreview.com/rss.php"
+}
+
+###
+GET {{baseUrl}}/topics/rsshub
+
+### 获取用户
+GET {{baseUrl}}/accounts/59a34f78e57c438d8a0034bf5c270bd3
+
+### 获取全部用户
+GET {{baseUrl}}/accounts
 
 ### 新建用户
-POST {{baseUrl}}/backend/user
+POST {{baseUrl}}/accounts
 content-type: application/json
 
 {
     "username": "{{$randomInt 0 50000}}",
-    "password": "abc"
+    "password": "8888888"
 }
 
 
