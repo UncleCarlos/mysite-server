@@ -10,8 +10,6 @@ import {
 
 import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity'
 
-type id = number | string
-
 export abstract class ServiceHelper<T> {
   constructor(private readonly repository: Repository<T>) {}
 
@@ -19,7 +17,7 @@ export abstract class ServiceHelper<T> {
     return await this.repository.find(options)
   }
 
-  public async findOne(id: id, options: FindOneOptions<T> = {}) {
+  public async findOne(id: string, options: FindOneOptions<T> = {}) {
     return await this.repository.findOne(id, options)
   }
 
@@ -27,7 +25,7 @@ export abstract class ServiceHelper<T> {
     return await this.repository.findOne({ where, relations })
   }
 
-  public async findByIds(ids: id[], options: FindManyOptions<T> = {}) {
+  public async findByIds(ids: string[], options: FindManyOptions<T> = {}) {
     return await this.repository.findByIds(ids, options)
   }
 
@@ -40,7 +38,11 @@ export abstract class ServiceHelper<T> {
     return await this.save(result, options)
   }
 
-  public async update(id: id, partial: QueryDeepPartialEntity<T>, options: FindOneOptions<T> = {}) {
+  public async update(
+    id: string,
+    partial: QueryDeepPartialEntity<T>,
+    options: FindOneOptions<T> = {}
+  ) {
     await this.repository.update(id, partial)
     return this.findOne(id, options)
   }
@@ -49,7 +51,7 @@ export abstract class ServiceHelper<T> {
     return await this.repository.save<T>(model, options)
   }
 
-  public async delete(id: id, options: FindOneOptions<T> = {}) {
+  public async delete(id: string, options: FindOneOptions<T> = {}) {
     const model = await this.repository.findOne(id, options)
     await this.repository.delete(id)
     return model

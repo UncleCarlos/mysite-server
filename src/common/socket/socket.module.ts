@@ -10,7 +10,7 @@ import { SocketGateway } from './socket.gateway'
     SocketGateway,
     {
       provide: LoggerService,
-      useValue: new LoggerService('SocketModule'),
+      useValue: new LoggerService(SocketModule.name),
     },
   ],
   exports: [SocketGateway],

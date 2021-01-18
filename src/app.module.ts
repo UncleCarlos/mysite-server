@@ -10,9 +10,11 @@ import { DatabaseModule } from '@/common/database/database.module'
 import { RedisModule } from '@/common/redis/redis.module'
 import { LoggerModule } from '@/common/logger/logger.module'
 import { SocketModule } from '@/common/socket/socket.module'
+import { CollectorModule } from '@/common/schedule/collector/collector.module'
 // 模块
 import { AccountsModule } from '@/modules/accounts/accounts.module'
-import { SourcesModule } from './modules/sources/sources.module'
+import { SourcesModule } from '@/modules/sources/sources.module'
+import { FeedersModule } from '@/modules/feeders/feeders.module'
 
 @Module({
   imports: [
@@ -23,6 +25,8 @@ import { SourcesModule } from './modules/sources/sources.module'
     ScheduleModule.forRoot(),
     AccountsModule,
     SourcesModule,
+    CollectorModule,
+    FeedersModule,
   ],
   controllers: [],
   providers: [
